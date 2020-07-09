@@ -18,6 +18,9 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+    - name: Set GIT tag name
+      run: |
+        echo "::set-env name=TRAVIS_TAG::$(git describe --exact-match --tags)"
     - name: Deploy updated JSON
       env:
         TRAVIS_BUILD_DIR: ${{ github.workspace }}
@@ -25,4 +28,6 @@ jobs:
         GHKEY: ${{ secrets.GHKEY }}
         GHIV: ${{ secrets.GHIV }}
       run: |
-           bash package/deploy_package_index.sh
+           bash ./tests/ci/build_package.sh
+           # Only the regenerated JSON file will be used, but it's simpler than looking for it in a GH release
+           bash ./package/deploy_package_index.sh
