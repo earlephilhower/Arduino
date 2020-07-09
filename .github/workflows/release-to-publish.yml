@@ -25,4 +25,4 @@ jobs:
         GHKEY: ${{ secrets.GHKEY }}
         GHIV: ${{ secrets.GHIV }}
       run: |
-           bash bash package/deploy_package_index.sh
+           bash package/deploy_package_index.sh
