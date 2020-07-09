@@ -1,5 +1,5 @@
 # Whenever a release is published from a draft, this will update the
-# global JSON file to add its new entry.
+# master Arduino JSON file to add its new entry.
 
 name: ESP8266 Arduino Release Publisher
 
@@ -9,7 +9,7 @@ on:
 
 jobs:
   package:
-    name: Update global JSON file
+    name: Update master JSON file
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    - name: Build package JSON
+    - name: Deploy updated JSON
       env:
         TRAVIS_BUILD_DIR: ${{ github.workspace }}
         BUILD_TYPE: package
